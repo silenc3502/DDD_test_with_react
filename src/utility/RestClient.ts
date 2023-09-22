@@ -6,7 +6,6 @@ export class RestClient {
   constructor() {
     this.axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_BASE_URL,
-      // baseURL: 'http://localhost:7777',
       timeout: 2500,
     });
   }

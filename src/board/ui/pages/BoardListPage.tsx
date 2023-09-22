@@ -18,7 +18,6 @@ const BoardListPage = () => {
         const boardResource = new BoardResource(restClient, boardStore);
         const boardService = new BoardService(boardResource);
         const fetchedBoardList = await boardService.getBoardList();
-        console.log("fetchedBoardList: ", fetchedBoardList)
 
         const convertedBoardList = fetchedBoardList.map((boardView) => {
           const boardProperties = {
@@ -27,8 +26,6 @@ const BoardListPage = () => {
           };
           return boardProperties;
         });
-
-        console.log("convertedBoardList: ", convertedBoardList)
 
         boardStore.saveBoardList(convertedBoardList);
       } catch (error) {
@@ -43,7 +40,7 @@ const BoardListPage = () => {
     }
 
     return () => {
-      boardStore.saveBoardList([]); // 빈 배열로 초기화
+      boardStore.saveBoardList([]);
     };
   }, []);
 
