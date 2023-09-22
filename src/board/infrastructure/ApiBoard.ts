@@ -11,7 +11,6 @@ export class ApiBoard {
     ) {}
 
     toDomain(): Board {
-        console.log('Inside toDomain:', this)
         return Board.fromProperties({
             boardId: this.boardId,
             title: this.title,

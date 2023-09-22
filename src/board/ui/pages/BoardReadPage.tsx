@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useQueryClient } from 'react-query'
 
 import BoardReadForm from "../components/BoardReadForm"
 import { BoardService } from "../../application/use-cases"
@@ -13,7 +14,9 @@ const BoardListPage = () => {
   const [board, setBoard] = useState<BoardView | null>(null);
   const [isLoading, setLoading] = useState(false);
   const boardStore = useBoardStore()
+
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
   const restClient = new RestClient()
   const boardResource = new BoardResource(restClient, boardStore);
@@ -40,6 +43,7 @@ const BoardListPage = () => {
   const onRemove = async () => {
     try {
       await boardService.deleteBoard(Number(boardId));
+      queryClient.invalidateQueries('saveBoardList')
       alert('게시물이 삭제되었습니다')
       navigate("/react-board-app")
     } catch (e) {

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { BoardView } from '../../application/BoardView'
 import styled from 'styled-components';
+import { BoardProperties } from '../../types';
 
 const Table = styled.table`
   border-collapse: collapse;
@@ -9,7 +10,7 @@ const Table = styled.table`
 `;
 
 interface BoardListFormProps {
-  boardList: BoardView[];
+  boardList: BoardProperties[];
   isLoading: boolean;
 }
 
@@ -44,7 +45,7 @@ const BoardListForm: React.FC<BoardListFormProps> = ({ boardList, isLoading }) =
                     <Link to={`/react-board-app/read/${board.boardId}`}>{ board.title }</Link>
                   </td>
                   <td align="right">{ board.writer }</td>
-                  <td align="center">{ board.regDate }</td>
+                  <td align="center">{ board.regDate.toLocaleDateString() }</td>
                 </tr>
               )))}
             </tbody>

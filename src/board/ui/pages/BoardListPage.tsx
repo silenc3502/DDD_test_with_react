@@ -5,9 +5,10 @@ import { BoardView } from "../../application/BoardView"
 import { BoardResource } from '../../infrastructure/BoardResource';
 import { RestClient } from '../../../utility/RestClient';
 import { useBoardStore } from '../../infrastructure/BoardStore';
+import { Board } from '../../Board';
+import { BoardProperties } from '../../types';
 
 const BoardListPage = () => {
-  const [boardList, setBoardList] = useState<BoardView[]>([])
   const [isLoading, setLoading] = useState(false)
   const boardStore = useBoardStore()
 
@@ -19,7 +20,16 @@ const BoardListPage = () => {
         const boardResource = new BoardResource(restClient, boardStore);
         const boardService = new BoardService(boardResource);
         const fetchedBoardList = await boardService.getBoardList()
-        setBoardList(fetchedBoardList);
+        const convertedBoardList: BoardProperties[] = fetchedBoardList.map((boardView) => {
+          const boardProperties: BoardProperties = {
+              ...boardView,
+              regDate: new Date(boardView.regDate)
+          };
+          return boardProperties;
+        });
+
+        boardStore.saveBoardList(convertedBoardList)
+        //setBoardList(fetchedBoardList);
         setLoading(false)
       } catch (error) {
         setLoading(false)
@@ -30,11 +40,11 @@ const BoardListPage = () => {
     fetchBoardList();
   }, []);
 
-    return (
-        <div>
-            <BoardListForm boardList={boardList} isLoading={isLoading} />
-        </div>
-    );
+  return (
+    <div>
+      <BoardListForm boardList={boardStore.boardList} isLoading={isLoading} />
+    </div>
+  );
 }
 
 export default BoardListPage
