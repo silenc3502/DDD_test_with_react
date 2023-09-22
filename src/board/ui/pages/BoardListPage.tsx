@@ -4,7 +4,7 @@ import { BoardService } from "../../application/use-cases"
 import { BoardView } from "../../application/BoardView"
 import { BoardResource } from '../../infrastructure/BoardResource';
 import { RestClient } from '../../../utility/RestClient';
-import { useBoardStore } from '../../../board/infrastructure/BoardStore';
+import { useBoardStore } from '../../infrastructure/BoardStore';
 
 const BoardListPage = () => {
   const [boardList, setBoardList] = useState<BoardView[]>([])
@@ -19,9 +19,6 @@ const BoardListPage = () => {
         const boardResource = new BoardResource(restClient, boardStore);
         const boardService = new BoardService(boardResource);
         const fetchedBoardList = await boardService.getBoardList()
-
-        console.log('Fetched Board List:', fetchedBoardList);
-
         setBoardList(fetchedBoardList);
         setLoading(false)
       } catch (error) {

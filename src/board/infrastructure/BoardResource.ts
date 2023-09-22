@@ -17,10 +17,10 @@ export class BoardResource implements BoardRepository {
       return boardListInStore.map(Board.fromProperties);
     }
 
-    const response = await this.restClient.get<ApiBoard[]>(
+    const boardListResponse = await this.restClient.get<ApiBoard[]>(
       '/board/list'
     );
-    const apiBoardList = response.data
+    const apiBoardList = boardListResponse.data
 
     console.log('API Board List:', apiBoardList);
 
@@ -34,29 +34,48 @@ export class BoardResource implements BoardRepository {
     return boardList;
   }
 
-  getBoard(boardId: BoardId): Promise<Board> {
-    throw new Error("Method not implemented.");
+  async getBoard(boardId: BoardId): Promise<Board> {
+    const boardInStore = this.store.boardList.find((board) => board.boardId === boardId);
+  
+    if (boardInStore) {
+      return Board.fromProperties(boardInStore);
+    }
+
+    const boardResponse = await this.restClient.get<ApiBoard>(`/board/${boardId}`);
+    const apiBoard = boardResponse.data;
+
+    const boardInstance = new ApiBoard(
+      apiBoard.boardId, apiBoard.title, apiBoard.writer, apiBoard.content, apiBoard.regDate);
+    
+    return boardInstance.toDomain();
   }
 
   async createBoard(form: BoardToSave): Promise<Board> {
-    const apiBoard = await this.restClient.post<ApiBoard, BoardToSave>(
+    const createdBoardResponse = await this.restClient.post<ApiBoard, BoardToSave>(
       '/board/register',
+      form
+    );
+
+    const boardInstance = new ApiBoard(
+      createdBoardResponse.boardId, 
+      createdBoardResponse.title, 
+      createdBoardResponse.writer, 
+      createdBoardResponse.content, 
+      createdBoardResponse.regDate);
+
+    return boardInstance.toDomain();
+  }
+
+  async updateBoard(boardId: BoardId, form: BoardToSave): Promise<Board> {
+    const apiBoard = await this.restClient.put<ApiBoard, BoardToSave>(
+      `/board/${boardId}`,
       form
     );
 
     return apiBoard.toDomain();
   }
 
-  async updateBoard(boardId: BoardId, form: BoardToSave): Promise<Board> {
-    const apiBoard = await this.restClient.put<ApiBoard, BoardToSave>(
-        `/board/${boardId}`,
-        form
-      );
-  
-      return apiBoard.toDomain();
-    }
-
-    async deleteBoard(boardId: BoardId): Promise<void> {
-        await this.restClient.delete(`/board/${boardId}`);
-    }
+  async deleteBoard(boardId: BoardId): Promise<void> {
+      await this.restClient.delete(`/board/${boardId}`);
+  }
 }

@@ -8,4 +8,4 @@ export type BoardProperties = {
     regDate: Date;
 };
 
-export type BoardToSave = Omit<BoardProperties, "id">;
+export type BoardToSave = Omit<BoardProperties, "boardId" | "regDate">;
