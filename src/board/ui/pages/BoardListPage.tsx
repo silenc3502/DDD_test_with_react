@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import BoardListForm from "../components/BoardListForm"
 import { BoardService } from "../../application/use-cases"
-import { BoardView } from "../../application/BoardView"
 import { BoardResource } from '../../infrastructure/BoardResource';
 import { RestClient } from '../../../utility/RestClient';
 import { useBoardStore } from '../../infrastructure/BoardStore';
-import { Board } from '../../Board';
-import { BoardProperties } from '../../types';
 
 const BoardListPage = () => {
   const [isLoading, setLoading] = useState(false)

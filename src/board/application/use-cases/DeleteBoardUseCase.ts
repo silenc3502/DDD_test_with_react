@@ -1,6 +1,5 @@
-import {BoardRepository} from "../../repository/BoardRepository";
-import {BoardId} from "../../types";
-import {BoardView} from "../../application/BoardView";
+import { BoardRepository } from "../../repository/BoardRepository";
+import { BoardId } from "../../types";
 
 export class DeleteBoardUseCase {
     constructor(

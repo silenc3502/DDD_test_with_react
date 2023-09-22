@@ -9,3 +9,4 @@ export type BoardProperties = {
 };
 
 export type BoardToSave = Omit<BoardProperties, "boardId" | "regDate">;
+export type BoardToUpdate = Omit<BoardProperties, "boardId" | "writer" | "regDate">;

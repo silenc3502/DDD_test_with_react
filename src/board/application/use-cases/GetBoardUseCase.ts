@@ -1,6 +1,6 @@
-import {BoardId} from "../../types";
-import {BoardRepository} from "../../repository/BoardRepository";
-import {Board} from "../../Board";
+import { BoardId } from "../../types";
+import { BoardRepository } from "../../repository/BoardRepository";
+import { Board } from "../../Board";
 
 export class GetBoardUseCase {
     constructor(private readonly boardRepository: BoardRepository) {}

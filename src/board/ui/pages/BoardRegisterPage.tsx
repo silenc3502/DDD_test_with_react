@@ -6,13 +6,11 @@ import { BoardService } from "../../application/use-cases"
 import { BoardResource } from '../../infrastructure/BoardResource';
 import { RestClient } from '../../../utility/RestClient';
 import { useBoardStore } from '../../../board/infrastructure/BoardStore';
-import {BoardProperties, BoardToSave} from '../../types'
-import {useQueryClient} from "react-query";
+import { BoardToSave } from '../../types'
 
 const BoardListPage = () => {
   const boardStore = useBoardStore()
   const navigate = useNavigate()
-  const queryClient = useQueryClient()
 
   const onRegister = async (boardToSave: BoardToSave) => {
     try {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useQueryClient } from 'react-query'
 
 import BoardReadForm from "../components/BoardReadForm"
 import { BoardService } from "../../application/use-cases"
@@ -8,7 +7,6 @@ import { BoardResource } from '../../infrastructure/BoardResource';
 import { RestClient } from '../../../utility/RestClient';
 import { useBoardStore } from '../../../board/infrastructure/BoardStore';
 import { BoardView } from "../../application/BoardView"
-import {BoardProperties} from "@/board/types";
 
 const BoardListPage = () => {
   const { boardId } = useParams<{ boardId: string | undefined }>();
@@ -17,7 +15,6 @@ const BoardListPage = () => {
   const boardStore = useBoardStore()
 
   const navigate = useNavigate()
-  const queryClient = useQueryClient()
 
   const restClient = new RestClient()
   const boardResource = new BoardResource(restClient, boardStore);

@@ -1,6 +1,6 @@
 import { RestClient } from '../../utility/RestClient';
 import { BoardRepository } from '../repository/BoardRepository';
-import { BoardId, BoardToSave } from "../types";
+import { BoardId, BoardToSave, BoardToUpdate } from "../types";
 import { Board } from "../Board";
 import { ApiBoard } from "./ApiBoard";
 import { BoardStore } from "./BoardStore";
@@ -66,13 +66,20 @@ export class BoardResource implements BoardRepository {
     return boardInstance.toDomain();
   }
 
-  async updateBoard(boardId: BoardId, form: BoardToSave): Promise<Board> {
-    const apiBoard = await this.restClient.put<ApiBoard, BoardToSave>(
+  async updateBoard(boardId: BoardId, form: BoardToUpdate): Promise<Board> {
+    const updatedBoardResponse = await this.restClient.put<ApiBoard, BoardToUpdate>(
       `/board/${boardId}`,
       form
     );
 
-    return apiBoard.toDomain();
+    const boardInstance = new ApiBoard(
+        updatedBoardResponse.boardId,
+        updatedBoardResponse.title,
+        updatedBoardResponse.writer,
+        updatedBoardResponse.content,
+        updatedBoardResponse.regDate);
+
+    return boardInstance.toDomain();
   }
 
   async deleteBoard(boardId: BoardId): Promise<void> {

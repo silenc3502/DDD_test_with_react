@@ -1,8 +1,6 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { BoardView } from '../../application/BoardView'
-import { BoardToSave } from '../../types'
-import styled from 'styled-components';
 
 type BoardReadFormProps = {
   boardId: string | undefined;
@@ -26,7 +24,7 @@ const BoardReadForm: React.FC<BoardReadFormProps> = ({
           <p>작성자: {board.writer}</p>
           <p>내용: {board.content}</p>
           <p>등록일자: {board.regDate}</p>
-          <Link to={`/react-board-app/edit/${boardId}`}>수정</Link>
+          <Link to={`/react-board-app/modify/${boardId}`}>수정</Link>
           <button onClick={onRemove}>삭제</button>
           <Link to={`/react-board-app/`}>취소</Link>
         </div>

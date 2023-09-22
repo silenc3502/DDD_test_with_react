@@ -1,5 +1,5 @@
-import {BoardRepository} from "../../repository/BoardRepository";
-import {BoardView} from "../../application/BoardView";
+import { BoardRepository } from "../../repository/BoardRepository";
+import { BoardView } from "../../application/BoardView";
 
 export class GetBoardListUseCase {
     constructor(private readonly boardRepository: BoardRepository) {}

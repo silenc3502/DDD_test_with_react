@@ -1,5 +1,5 @@
-import {BoardId} from "../types";
-import {Board} from "../Board";
+import { BoardId } from "../types";
+import { Board } from "../Board";
 
 export class ApiBoard {
     constructor(
