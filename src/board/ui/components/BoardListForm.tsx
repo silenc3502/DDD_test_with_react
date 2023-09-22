@@ -38,13 +38,13 @@ const BoardListForm: React.FC<BoardListFormProps> = ({ boardList, isLoading }) =
                   </td>
                 </tr>
               ) : ( boardList.map((board) => (
-                <tr key={board.id}>
-                  <td align="center">{ board.id }</td>
+                <tr key={board.boardId}>
+                  <td align="center">{ board.boardId }</td>
                   <td align="left">
-                    <Link to={`/react-board-app/read/${board.id}`}>{ board.title }</Link>
+                    <Link to={`/react-board-app/read/${board.boardId}`}>{ board.title }</Link>
                   </td>
                   <td align="right">{ board.writer }</td>
-                  <td align="center">{ board.updatedAt }</td>
+                  <td align="center">{ board.regDate }</td>
                 </tr>
               )))}
             </tbody>

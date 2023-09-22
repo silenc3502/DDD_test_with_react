@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import BoardListForm from "../components/BoardListForm"
 import { BoardService } from "../../application/use-cases"
 import { BoardView } from "../../application/BoardView"
@@ -19,6 +19,9 @@ const BoardListPage = () => {
         const boardResource = new BoardResource(restClient, boardStore);
         const boardService = new BoardService(boardResource);
         const fetchedBoardList = await boardService.getBoardList()
+
+        console.log('Fetched Board List:', fetchedBoardList);
+
         setBoardList(fetchedBoardList);
         setLoading(false)
       } catch (error) {

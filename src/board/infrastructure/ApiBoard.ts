@@ -3,20 +3,21 @@ import {Board} from "../Board";
 
 export class ApiBoard {
     constructor(
-        public readonly id: BoardId,
+        public readonly boardId: BoardId,
         public readonly title: string,
         public readonly writer: string,
         public readonly content: string,
-        public readonly updatedAt: string
+        public readonly regDate: string,
     ) {}
 
     toDomain(): Board {
+        console.log('Inside toDomain:', this)
         return Board.fromProperties({
-            id: this.id,
+            boardId: this.boardId,
             title: this.title,
             writer: this.writer,
             content: this.content,
-            updatedAt: new Date(this.updatedAt),
+            regDate: new Date(this.regDate),
         });
     }
 }

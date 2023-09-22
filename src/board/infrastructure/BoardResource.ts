@@ -21,7 +21,14 @@ export class BoardResource implements BoardRepository {
       '/board/list'
     );
     const apiBoardList = response.data
-    const boardList = apiBoardList.map((apiBoard: ApiBoard) => apiBoard.toDomain());
+
+    console.log('API Board List:', apiBoardList);
+
+    const boardList = apiBoardList.map((apiBoard: ApiBoard) => {
+      const boardInstance = new ApiBoard(
+        apiBoard.boardId, apiBoard.title, apiBoard.writer, apiBoard.content, apiBoard.regDate);
+      return boardInstance.toDomain();
+    })
     this.store.saveBoardList(boardList.map((board: Board) => board.properties));
 
     return boardList;

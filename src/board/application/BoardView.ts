@@ -3,22 +3,22 @@ import type { Board } from "../Board";
 
 export class BoardView {
     private constructor(
-        public readonly id: BoardId,
+        public readonly boardId: BoardId,
         public readonly title: string,
         public readonly writer: string,
         public readonly content: string,
-        public readonly updatedAt: string
+        public readonly regDate: string
     ) {}
 
     static fromDomain(board: Board) {
-        const { id, title, writer, content, updatedAt } =
+        const { boardId, title, writer, content, regDate } =
             board.properties;
         return new BoardView(
-            id,
+            boardId,
             title,
             writer,
             content,
-            updatedAt.toLocaleDateString()
+            regDate.toLocaleDateString()
         );
     }
 }

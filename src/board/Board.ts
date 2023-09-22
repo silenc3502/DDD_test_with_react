@@ -2,28 +2,28 @@ import type { BoardProperties } from "@/board/types";
 
 export class Board {
     private constructor(
-        private readonly id: number,
+        private readonly boardId: number,
         private title: string,
         private readonly writer: string,
         private content: string,
-        private readonly updatedAt: Date
+        private readonly regDate: Date
     ) {}
     static fromProperties(properties: BoardProperties) {
         const {
-            id,
+            boardId,
             title,
             writer,
             content,
-            updatedAt } = properties;
-        return new Board(id, title, writer, content, updatedAt);
+            regDate } = properties;
+        return new Board(boardId, title, writer, content, regDate);
     }
     get properties(): BoardProperties {
         return {
-            id: this.id,
+            boardId: this.boardId,
             title: this.title,
             writer: this.writer,
             content: this.content,
-            updatedAt: this.updatedAt,
+            regDate: this.regDate,
         };
     }
 }
