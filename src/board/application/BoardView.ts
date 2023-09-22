@@ -1,5 +1,5 @@
-import type { BoardId } from "@/board/types";
-import type { Board } from "@/board/Board";
+import type { BoardId } from "../types";
+import type { Board } from "../Board";
 
 export class BoardView {
     private constructor(

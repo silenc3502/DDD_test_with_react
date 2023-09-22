@@ -1,6 +1,6 @@
-import {BoardRepository} from "@/board/repository/BoardRepository";
-import {BoardToSave} from "@/board/types";
-import {BoardView} from "@/board/application/BoardView";
+import {BoardRepository} from "../../repository/BoardRepository";
+import {BoardToSave} from "../../types";
+import {BoardView} from "../../application/BoardView";
 
 export class CreateBoardUseCase {
     constructor(

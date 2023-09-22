@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { BoardProperties } from "@/board/types";
+import { BoardProperties } from "../types";
 
 export type BoardStore = {
   boardList: BoardProperties[];

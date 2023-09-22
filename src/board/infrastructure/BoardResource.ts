@@ -1,9 +1,9 @@
-import { RestClient } from '@/utility/RestClient';
-import { BoardRepository } from '@/board/repository/BoardRepository';
-import { BoardId, BoardToSave } from "@/board/types";
-import { Board } from "@/board/Board";
-import { ApiBoard } from "@/board/infrastructure/ApiBoard";
-import { BoardStore } from "@/board/infrastructure/BoardStore";
+import { RestClient } from '../../utility/RestClient';
+import { BoardRepository } from '../repository/BoardRepository';
+import { BoardId, BoardToSave } from "../types";
+import { Board } from "../Board";
+import { ApiBoard } from "./ApiBoard";
+import { BoardStore } from "./BoardStore";
 
 export class BoardResource implements BoardRepository {
   constructor(

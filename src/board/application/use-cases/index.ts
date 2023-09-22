@@ -1,10 +1,10 @@
-import type {BoardId, BoardToSave} from "@/board/types";
-import { BoardRepository } from "@/board/repository/BoardRepository";
-import {CreateBoardUseCase} from "@/board/application/use-cases/CreateBoardUseCase";
-import {GetBoardListUseCase} from "@/board/application/use-cases/GetBoardListUseCase";
-import {GetBoardUseCase} from "@/board/application/use-cases/GetBoardUseCase";
+import type {BoardId, BoardToSave} from "../../types";
+import { BoardRepository } from "../../repository/BoardRepository";
+import {CreateBoardUseCase} from "./CreateBoardUseCase";
+import {GetBoardListUseCase} from "./GetBoardListUseCase";
+import {GetBoardUseCase} from "./GetBoardUseCase";
 
-export class RecipeService {
+export class BoardService {
     private getBoardListUseCase: GetBoardListUseCase;
     private getBoardUseCase: GetBoardUseCase;
     private createBoardUseCase: CreateBoardUseCase;

@@ -1,5 +1,5 @@
-import {Board} from "@/board/Board";
-import type {BoardId, BoardToSave} from "@/board/types";
+import {Board} from "../Board";
+import type {BoardId, BoardToSave} from "../types";
 
 export interface BoardRepository {
     getBoardList(): Promise<Board[]>;
