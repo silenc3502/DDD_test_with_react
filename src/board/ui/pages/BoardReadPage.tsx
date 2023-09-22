@@ -8,6 +8,7 @@ import { BoardResource } from '../../infrastructure/BoardResource';
 import { RestClient } from '../../../utility/RestClient';
 import { useBoardStore } from '../../../board/infrastructure/BoardStore';
 import { BoardView } from "../../application/BoardView"
+import {BoardProperties} from "@/board/types";
 
 const BoardListPage = () => {
   const { boardId } = useParams<{ boardId: string | undefined }>();
@@ -43,7 +44,7 @@ const BoardListPage = () => {
   const onRemove = async () => {
     try {
       await boardService.deleteBoard(Number(boardId));
-      queryClient.invalidateQueries('saveBoardList')
+
       alert('게시물이 삭제되었습니다')
       navigate("/react-board-app")
     } catch (e) {

@@ -14,31 +14,45 @@ const BoardListPage = () => {
 
   useEffect(() => {
     async function fetchBoardList() {
-      setLoading(true)
+      setLoading(true);
       try {
-        const restClient = new RestClient()
+        console.log("fetching Board")
+        const restClient = new RestClient();
         const boardResource = new BoardResource(restClient, boardStore);
         const boardService = new BoardService(boardResource);
-        const fetchedBoardList = await boardService.getBoardList()
-        const convertedBoardList: BoardProperties[] = fetchedBoardList.map((boardView) => {
-          const boardProperties: BoardProperties = {
-              ...boardView,
-              regDate: new Date(boardView.regDate)
+        const fetchedBoardList = await boardService.getBoardList();
+        console.log("fetchedBoardList: ", fetchedBoardList)
+
+        const convertedBoardList = fetchedBoardList.map((boardView) => {
+          const boardProperties = {
+            ...boardView,
+            regDate: new Date(boardView.regDate),
           };
           return boardProperties;
         });
 
-        boardStore.saveBoardList(convertedBoardList)
-        //setBoardList(fetchedBoardList);
-        setLoading(false)
+        console.log("convertedBoardList: ", convertedBoardList)
+
+        boardStore.saveBoardList(convertedBoardList);
       } catch (error) {
-        setLoading(false)
         console.error("Error fetching boardList:", error);
+      } finally {
+        setLoading(false);
       }
     }
 
-    fetchBoardList();
+    if (!isLoading) {
+      fetchBoardList();
+    }
+
+    return () => {
+      boardStore.saveBoardList([]); // 빈 배열로 초기화
+    };
   }, []);
+
+  useEffect(() => {
+    console.log("boardList changed:", boardStore.boardList);
+  }, [boardStore.boardList]);
 
   return (
     <div>

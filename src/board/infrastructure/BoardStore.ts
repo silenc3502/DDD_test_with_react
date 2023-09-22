@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { BoardProperties } from "../types";
 
 export type BoardStore = {
@@ -8,5 +8,5 @@ export type BoardStore = {
 
 export const useBoardStore = create<BoardStore>((set) => ({
   boardList: [],
-  saveBoardList: (boardList) => set({ boardList }),
+  saveBoardList: (savedBoardList) => set({ boardList: savedBoardList }),
 }));
